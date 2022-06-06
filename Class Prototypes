@@ -1,0 +1,47 @@
+#pragma once
+
+template<typename T>
+class Vector
+{
+public:
+	Vector()
+	{
+		m_cap = 1;
+		m_size = 0;
+		m_arr = new T[m_cap];
+	}
+	Vector(size_t);
+	Vector(size_t, T);
+	Vector(std::initializer_list<T>&);
+	Vector(const Vector&);
+	Vector(Vector&&);
+	Vector& operator=(const Vector&);
+	Vector& operator=(Vector&&);
+	void push_back(const T&);
+	void push_back(T&&);
+	void pop_back();
+	void insert(size_t, const T&);
+	void insert(size_t, T&&);
+	bool empty() const;
+	size_t size() const;
+	size_t capacity() const;
+	void clear();
+	void resize(size_t);
+	void erase(size_t);
+	T& at(size_t);
+	T& at(size_t) const;
+	T& operator[](size_t);
+	T& operator[](size_t) const;
+	~Vector()
+	{
+		if (m_arr)
+		{
+			delete[]m_arr;
+		}
+		m_arr = nullptr;
+	}
+private:
+	size_t m_cap;
+	size_t m_size;
+	T* m_arr;
+};
